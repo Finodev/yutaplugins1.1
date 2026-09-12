@@ -100,6 +100,20 @@ public final class CustomRPCSettings extends BottomSheet {
         smallImageText = addInput(context, "Small image text (optional)", CustomRPC.SMALL_IMAGE_TEXT,
                 "");
 
+        addSectionHeader(context, "Buttons (up to 2)", false);
+        addIntro(context, "Buttons may not appear on some mobile Discord builds. Labels and links are saved and will work if the client supports them.");
+        addInput(context, "Button 1 label", CustomRPC.BUTTON1_LABEL, "");
+        addInput(context, "Button 1 URL", CustomRPC.BUTTON1_URL, "https://");
+        addInput(context, "Button 2 label", CustomRPC.BUTTON2_LABEL, "");
+        addInput(context, "Button 2 URL", CustomRPC.BUTTON2_URL, "https://");
+
+        addSectionHeader(context, "Timer", false);
+        addIntro(context, "Elapsed time is kept across refreshes. Auto-refresh runs every 60 seconds so the status does not disappear.");
+        addButton(context, "Reset elapsed timer", () -> {
+            plugin.resetStartTimestamp();
+            Utils.showToast("Timer reset");
+        });
+
         addButton(context, "Save and apply", () -> {
             plugin.enableActivitySharing(requireActivity());
             boolean applied = plugin.saveAndApply(
